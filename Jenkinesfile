@@ -1,1 +1,30 @@
-
+pipeline {
+     agent any
+     tools {
+          maven "MAVEN"
+          jdk "JDC'
+  }
+  stages {
+      stage( ' Initialize ){
+          steps{
+          echo "PATH = ${M2_HOME}/bin:${PATH}"
+          echo "t•12 HOME = /opt/maven"
+        }
+    }
+    stage('BuiId') {
+        steps {
+            dir("/var/lib/jenkins/workspace/demopipelinetask/my-app") {
+            sh 'mvn -B -DskipTests clean package'
+            }
+        }
+    }
+  }
+  post {
+    always {
+      junit(
+     allowEmptyResuIts: true,
+      testResu1ts :' * / test-reports/ .xml '
+    )
+    }
+  }
+}
